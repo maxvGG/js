@@ -64,8 +64,8 @@ const initialize = async() => {
     canvas.style.backgroundColor = 'black';
     document.getElementById('container').appendChild(canvas);
 
-    ctx = canvas.getContext('2d', { alpha: false });
-    ctx.imageSmoothingEnabled = false;
+    ctx = canvas.getContext('2d');
+    // ctx.imageSmoothingEnabled = false;
     ctx.font = '20px Verdana';
 
     Keyboard.setHandlers();
@@ -97,7 +97,7 @@ const run = () => {
     frame();
 };
 const update = (dt) => {
-    const playerSegment = Segment.find(position + playerZ)
+    const playerSegment = Segment.find(position + playerZ);
     const speedPercent = speed / maxSpeed;
     const dx = dt * 2 * speedPercent;
 
@@ -105,10 +105,10 @@ const update = (dt) => {
     if (keyLeft) {
         playerX -= dx;
     } else if (keyRight) {
-        playerX += dx
+        playerX += dx;
     }
 
-    playerX = playerX - dx * speedPercent * playerSegment.curve * centrifugal
+    playerX = playerX - dx * speedPercent * playerSegment.curve * centrifugal;
 
     if (keyFaster) {
         speed = Util.accelerate(speed, accel, dt);
@@ -120,9 +120,9 @@ const update = (dt) => {
 
     if ((playerX < -1 || playerX > 1) && speed > offRoadLimit) {
         speed = Util.accelerate(speed, offRoadDecel, dt);
-    };
+    }
 
-    playerX = Util.limit(playerX, -2, -2);
+    playerX = Util.limit(playerX, -2, 2);
     speed = Util.limit(speed, 0, maxSpeed);
 };
 const render = () => {

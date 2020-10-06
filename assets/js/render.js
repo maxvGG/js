@@ -46,5 +46,4 @@ class Render {
     static laneMarkerWidth(projectedRoadWidth, lanes) {
         return projectedRoadWidth / Math.max(32, 8 * lanes);
     }
-
 }
